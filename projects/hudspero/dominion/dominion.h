@@ -128,4 +128,19 @@ int getWinners(int players[MAX_PLAYERS], struct gameState *state);
 /* Set array position of each player who won (remember ties!) to
    1, others to 0 */
 
+//RE-FACTORED FOR ASSIGNMENT 2, BUGGED
+int playMine(int choice1, int choice2, struct gameState *state, int handPos);
+
+//RE-FACTORED FOR ASSIGNMENT 2, BUGGED
+int playBaron(int choice1, struct gameState *state, int handPos);
+
+//RE-FACTORED FOR ASSIGNMENT 2, BUGGED
+int playMinion(int choice1, int choice2, struct gameState *state, int handPos);
+
+//RE-FACTORED FOR ASSIGNMENT 2, BUGGED
+int playTribute(struct gameState *state, int handPos);
+
+//RE-FACTORED FOR ASSIGNMENT 2, BUGGED
+int playAmbassador(int choice1, int choice2, struct gameState *state, int handPos);
+
 #endif

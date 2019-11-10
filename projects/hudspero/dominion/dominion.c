@@ -18,8 +18,7 @@ struct gameState* newGame() {
     return g;
 }
 
-int* kingdomCards(int k1, int k2, int k3, int k4, int k5, int k6, int k7,
-                  int k8, int k9, int k10) {
+int* kingdomCards(int k1, int k2, int k3, int k4, int k5, int k6, int k7, int k8, int k9, int k10) {
     int* k = malloc(10 * sizeof(int));
     k[0] = k1;
     k[1] = k2;
@@ -34,8 +33,7 @@ int* kingdomCards(int k1, int k2, int k3, int k4, int k5, int k6, int k7,
     return k;
 }
 
-int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
-                   struct gameState *state) {
+int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed, struct gameState *state) {
     int i;
     int j;
     int it;
@@ -45,8 +43,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
     PutSeed((long)randomSeed);
 
     //check number of players
-    if (numPlayers > MAX_PLAYERS || numPlayers < 2)
-    {
+    if (numPlayers > MAX_PLAYERS || numPlayers < 2) {
         return -1;
     }
 
@@ -54,44 +51,35 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
     state->numPlayers = numPlayers;
 
     //check selected kingdom cards are different
-    for (i = 0; i < 10; i++)
-    {
-        for (j = 0; j < 10; j++)
-        {
-            if (j != i && kingdomCards[j] == kingdomCards[i])
-            {
+    for (i = 0; i < 10; i++) {
+        for (j = 0; j < 10; j++) {
+            if (j != i && kingdomCards[j] == kingdomCards[i]) {
                 return -1;
             }
         }
     }
 
-
     //initialize supply
     ///////////////////////////////
 
     //set number of Curse cards
-    if (numPlayers == 2)
-    {
+    if (numPlayers == 2) {
         state->supplyCount[curse] = 10;
     }
-    else if (numPlayers == 3)
-    {
+    else if (numPlayers == 3) {
         state->supplyCount[curse] = 20;
     }
-    else
-    {
+    else {
         state->supplyCount[curse] = 30;
     }
 
     //set number of Victory cards
-    if (numPlayers == 2)
-    {
+    if (numPlayers == 2) {
         state->supplyCount[estate] = 8;
         state->supplyCount[duchy] = 8;
         state->supplyCount[province] = 8;
     }
-    else
-    {
+    else {
         state->supplyCount[estate] = 12;
         state->supplyCount[duchy] = 12;
         state->supplyCount[province] = 12;
@@ -134,36 +122,30 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
     }
 
     ////////////////////////
-    //supply intilization complete
+    //supply initialization complete
 
     //set player decks
-    for (i = 0; i < numPlayers; i++)
-    {
+    for (i = 0; i < numPlayers; i++) {
         state->deckCount[i] = 0;
-        for (j = 0; j < 3; j++)
-        {
+        for (j = 0; j < 3; j++) {
             state->deck[i][j] = estate;
             state->deckCount[i]++;
         }
-        for (j = 3; j < 10; j++)
-        {
+        for (j = 3; j < 10; j++) {
             state->deck[i][j] = copper;
             state->deckCount[i]++;
         }
     }
 
     //shuffle player decks
-    for (i = 0; i < numPlayers; i++)
-    {
-        if ( shuffle(i, state) < 0 )
-        {
+    for (i = 0; i < numPlayers; i++) {
+        if ( shuffle(i, state) < 0 ) {
             return -1;
         }
     }
 
     //draw player hands
-    for (i = 0; i < numPlayers; i++)
-    {
+    for (i = 0; i < numPlayers; i++) {
         //initialize hand size to zero
         state->handCount[i] = 0;
         state->discardCount[i] = 0;
@@ -175,8 +157,7 @@ int initializeGame(int numPlayers, int kingdomCards[10], int randomSeed,
     }
 
     //set embargo tokens to 0 for all supply piles
-    for (i = 0; i <= treasure_map; i++)
-    {
+    for (i = 0; i <= treasure_map; i++) {
         state->embargoTokens[i] = 0;
     }
 
@@ -705,27 +686,27 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
 	//RE-FACTORED FOR ASSIGNMENT 2
 	case minion:
-		playMinion(card, choice1, choice2, state, handPos);
+		playMinion(choice1, choice2, state, handPos);
 		break;		
 	
 	//RE-FACTORED FOR ASSIGNMENT 2
 	case baron:
-		playBaron(card, choice1, state, handPos);
+		playBaron(choice1, state, handPos);
 		break;
 		
 	//RE-FACTORED FOR ASSIGNMENT 2
 	case ambassador:
-		playAmbassador(card, choice1, choice2, state, handPos);
+		playAmbassador(choice1, choice2, state, handPos);
 		break;
 		
 	//RE-FACTORED FOR ASSIGNMENT 2
 	case mine:
-		playMine(card, choice1, choice2, state, handPos);
+		playMine(choice1, choice2, state, handPos);
 		break;
 		
 	//RE-FACTORED FOR ASSIGNMENT 2
 	case tribute:
-		playTribute(card, state, handPos);
+		playTribute(state, handPos);
 		break;
 
     case council_room:
@@ -1077,7 +1058,7 @@ int updateCoins(int player, struct gameState *state, int bonus) {
 }
 
 //RE-FACTORED FOR ASSIGNMENT 2, BUGGED
-int playMine(int card, int choice1, int choice2, struct gameState *state, int handPos) {
+int playMine(int choice1, int choice2, struct gameState *state, int handPos) {
 	int currentPlayer = whoseTurn(state);
 	int i, j;
 	
@@ -1112,7 +1093,7 @@ int playMine(int card, int choice1, int choice2, struct gameState *state, int ha
 }
 
 //RE-FACTORED FOR ASSIGNMENT 2, BUGGED
-int playBaron(int card, int choice1, struct gameState *state, int handPos) {
+int playBaron(int choice1, struct gameState *state, int handPos) {
 	int currentPlayer = whoseTurn(state);
 	
 	state->numBuys++;//Increase buys by 1!
@@ -1168,7 +1149,7 @@ int playBaron(int card, int choice1, struct gameState *state, int handPos) {
 }
 
 //RE-FACTORED FOR ASSIGNMENT 2, BUGGED
-int playMinion(int card, int choice1, int choice2, struct gameState *state, int handPos) {
+int playMinion(int choice1, int choice2, struct gameState *state, int handPos) {
 	int currentPlayer = whoseTurn(state);
 	int i, j;
 	state->numActions++; //+1 action
@@ -1179,7 +1160,7 @@ int playMinion(int card, int choice1, int choice2, struct gameState *state, int 
 	}
 	else if (choice2) { //discard hand, redraw 4, other players with 5+ cards discard hand and draw 4
 		while(numHandCards(state) > 0) { //discard hand
-			discardCard(handPos, currentPlayer, state, 1); //BUG! trashFlag should be set to 0, not 1
+			discardCard(handPos, currentPlayer, state, 0); //BUG! trashFlag should be set to 0, not 1 (had to revert to run tests)
 		}
 
 		for (i = 0; i < 4; i++) { //draw 4
@@ -1206,7 +1187,7 @@ int playMinion(int card, int choice1, int choice2, struct gameState *state, int 
 }
 
 //RE-FACTORED FOR ASSIGNMENT 2, BUGGED
-int playTribute(int card, struct gameState *state, int handPos) {
+int playTribute(struct gameState *state, int handPos) {
 	int currentPlayer = whoseTurn(state);
     int nextPlayer = currentPlayer + 1;
 	int tributeRevealedCards[2] = {-1, -1};
@@ -1272,7 +1253,7 @@ int playTribute(int card, struct gameState *state, int handPos) {
 }
 
 //RE-FACTORED FOR ASSIGNMENT 2, BUGGED
-int playAmbassador(int card, int choice1, int choice2, struct gameState *state, int handPos) {
+int playAmbassador(int choice1, int choice2, struct gameState *state, int handPos) {
 	int i, j;
 	int currentPlayer = whoseTurn(state);
 	
