@@ -846,6 +846,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
         {
             return -1;
         }
+        // should read: if(choice2 < copper || choice2 > gold)
 
         if ( (getCost(state->hand[currentPlayer][choice1]) + 3) > getCost(choice2) )
         {
@@ -881,7 +882,7 @@ int cardEffect(int card, int choice1, int choice2, int choice3, struct gameState
 
         //discard card from hand
         discardCard(handPos, currentPlayer, state, 0);
-
+        //line above should have a 1 rather than a 0
         //discard trashed card
         for (i = 0; i < state->handCount[currentPlayer]; i++)
         {
