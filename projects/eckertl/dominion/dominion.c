@@ -24,8 +24,6 @@ struct gameState* newGame() {
     return g;
 }
 
-
-
 int* kingdomCards(int k1, int k2, int k3, int k4, int k5, int k6, int k7,
                   int k8, int k9, int k10) {
     int* k = malloc(10 * sizeof(int));
@@ -1543,7 +1541,7 @@ int mine2(struct gameState *state, int handPos, int choice1, int choice2){
     int j;
     int currentPlayer = whoseTurn(state);
 
- //BUG       j = state->hand[currentPlayer][choice1];  //store card we will trash
+    j = state->hand[currentPlayer][choice1];  //store card we will trash
 
     if (state->hand[currentPlayer][choice1] < copper || state->hand[currentPlayer][choice1] > gold)
     {
@@ -1659,7 +1657,7 @@ int updateCoins(int player, struct gameState *state, int bonus)
     int i;
 
     //reset coin count
-//BUG    state->coins = 0;
+    state->coins = 0;
 
     //add coins for each Treasure card in player's hand
     for (i = 0; i < state->handCount[player]; i++)
