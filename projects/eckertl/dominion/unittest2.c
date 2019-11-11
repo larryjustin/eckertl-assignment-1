@@ -6,7 +6,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-int localassert(int b, char* s) {
+void localassert(int b, char* s) {
     if (!b) {
         printf ("Failure to assert: %s\n", s);
         if (0) {
