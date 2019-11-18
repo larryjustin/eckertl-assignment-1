@@ -18,19 +18,19 @@ player: player.c interface.o
 randomtestcard1.out: randomtestcard1.c dominion.o rngs.o
 	gcc -o randomtestcard1 randomtestcard1.c dominion.o rngs.o $(CFLAGS)
 	./randomtestcard1 > randomtestcard1.out
-	gcov -f dominion.c >> randomtestcard1.out
+	gcov -f -b dominion.c >> randomtestcard1.out
 	cat dominion.c.gcov >> randomtestcard1.out
 
 randomtestcard2.out: randomtestcard2.c dominion.o rngs.o
 	gcc -o randomtestcard2 randomtestcard2.c dominion.o rngs.o $(CFLAGS)
 	./randomtestcard2 > randomtestcard2.out
-	gcov -f dominion.c >> randomtestcard2.out
+	gcov -f -b dominion.c >> randomtestcard2.out
 	cat dominion.c.gcov >> randomtestcard2.out
 
 randomtestcard3.out: randomtestcard3.c dominion.o rngs.o
 	gcc -o randomtestcard3 randomtestcard3.c dominion.o rngs.o $(CFLAGS)
 	./randomtestcard3 > randomtestcard3.out
-	gcov -f dominion.c >> randomtestcard3.out
+	gcov -f -b dominion.c >> randomtestcard3.out
 	cat dominion.c.gcov >> randomtestcard3.out
 
 

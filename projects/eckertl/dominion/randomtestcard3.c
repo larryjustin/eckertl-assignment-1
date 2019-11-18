@@ -1,5 +1,5 @@
 //
-// Random test for Minion card.
+// Random test for Tribute card.
 //
 #include "dominion.h"
 #include "dominion_helpers.h"
@@ -25,14 +25,15 @@ void checkasserts() {
 
 int main(int argc, char const *argv[]){
 
-    int x, r, i;
+    int r, i;
     int j = 0;
     struct gameState G;
     srand((int)argv[1]);
 
     for (i = 0; i < 2000; i++) {
+        int k[10] = { adventurer, council_room, feast, gardens, mine, remodel, smithy, village, baron, great_hall };
         r = initializeGame((rand() % MAX_PLAYERS), k, rand(), &G);
-        r = cardEffect(tribute, (rand() % 3), (rand() % 3), (rand() % 3), &g, 0, &j);
+        r = cardEffect(tribute, (rand() % 3), (rand() % 3), (rand() % 3), &G, 0, &j);
         localassert(r == 0, "Tribute Failure");
 
         if(failed) {
